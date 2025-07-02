@@ -1,10 +1,10 @@
-import gulp from 'gulp';
-import concat from 'gulp-concat';
-import uglify from 'gulp-uglify';
-import cleanCSS from 'gulp-clean-css';
-import htmlreplace from 'gulp-html-replace';
-import { exec } from 'child_process';
-import imagemin from 'gulp-imagemin';
+const gulp = require('gulp');
+const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
+const cleanCSS = require('gulp-clean-css');
+const htmlreplace = require('gulp-html-replace');
+const { exec } = require('child_process');
+const imagemin = require('gulp-imagemin');
 
 // Define paths
 const paths = {
@@ -39,8 +39,8 @@ const paths = {
 };
 
 // Clean output directory
-async function clean() {
-  const del = await import('del');
+function clean() {
+  const del = require('del');
   return del.deleteAsync(['dist']);
 }
 
@@ -190,5 +190,25 @@ const dockerClean = gulp.series(dockerStop, dockerRemoveContainer, dockerRemoveI
 // Define complex tasks
 const build = gulp.series(clean, gulp.parallel(styles, scripts, copyOther, replaceUrls, copyData, copyImages, copyDockerfile), npmInstall);
 const docker = gulp.series(build, dockerBuild, dockerRun);
+
 // Export tasks
-export { clean, styles, scripts, copyOther, replaceUrls, copyData, copyImages, copyDockerfile, npmInstall, build, dockerBuild, dockerRun, dockerStop, dockerRemoveContainer, dockerRemoveImage, dockerClean, docker, build as default };
+module.exports = {
+  clean,
+  styles,
+  scripts,
+  copyOther,
+  replaceUrls,
+  copyData,
+  copyImages,
+  copyDockerfile,
+  npmInstall,
+  build,
+  dockerBuild,
+  dockerRun,
+  dockerStop,
+  dockerRemoveContainer,
+  dockerRemoveImage,
+  dockerClean,
+  docker,
+  default: build
+};
