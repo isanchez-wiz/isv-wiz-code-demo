@@ -1,23 +1,30 @@
 {
     "wiz.codePolicies.secrets": [
+        "isv-secrets",
         "Default secrets policy"
     ],
     "wiz.codePolicies.sensitiveData": [
-        "Default sensitive data policy"
+        "Default sensitive data policy",
+        "isv-data"
     ],
     "wiz.codePolicies.vulnerabilities": [
-        "Default vulnerabilities policy"
+        "Default vulnerabilities policy",
+        "isv-vuln"
     ],
     "wiz.codePolicies.IAC Configuration": [
-        "Default IaC policy"
+        "Default IaC policy",
+        "isv-iac"
     ],
     "wiz.buildPolicies.secrets": [
-        "Default secrets policy"
+        "Default secrets policy",
+        "isv-secrets"
     ],
     "wiz.buildPolicies.sensitiveData": [
-        "Default sensitive data policy"
+        "Default sensitive data policy",
+        "isv-data"
     ],
     "wiz.buildPolicies.vulnerabilities": [
-        "Default vulnerabilities policy"
+        "Default vulnerabilities policy",
+        "isv-vuln"
     ]
 }
