@@ -9,7 +9,8 @@ CHANGE_DESCRIPTION="Wiz test, simulation of a fix to trigger scanning process ${
 #git pull origin main
 # NEW LOCAL BRANCH FOR CHANGES
 git checkout -b ${BRANCH_NAME}
-# EDIT YOUR FILES
+# EDIT YOUR FILES (force dummy change)
+echo "RANDOM: ${R}" > random-file.dummy
 git add .
 git commit -m "${CHANGE_DESCRIPTION}"
 git push origin ${BRANCH_NAME}
