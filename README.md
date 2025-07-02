@@ -1,4 +1,3 @@
-?
 # Readme
 Application code used for the github wiz halftime demo
 
@@ -30,4 +29,21 @@ gulp docker
 View in browser:
 ```bash
 http://localhost:3000
+```
+
+To do code changes, PR and merge, execute:
+```BRANCH_NAME="fix-testing"
+CHANGE_TITLE="Fix simulation"
+CHANGE_DESCRIPTION="Wiz test, simulation of a fix to trigger scanning process"
+git checkout -b ${BRANCH_NAME}
+git checkout main
+git pull origin main
+# EDIT YOUR FILES
+git add .
+git commit -m "${CHANGE_DESCRIPTION}"
+git push origin ${BRANCH_NAME}
+gh pr create --base main --head ${BRANCH_NAME} --title "${CHANGE_TITLE}" --body "${CHANGE_DESCRIPTION}"
+gh pr merge ${BRANCH_NAME} --merge
+git branch -d ${BRANCH_NAME}
+git push origin --delete ${BRANCH_NAME}
 ```
