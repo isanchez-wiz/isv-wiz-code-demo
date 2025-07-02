@@ -66,4 +66,5 @@ jobs:
           COMMIT_SHA: ${{ github.sha }}
         run: |
           IMAGE_URI=$REGISTRY/$REPOSITORY:${COMMIT_SHA}
+          echo sha256:${COMMIT_SHA}
           sudo -E ./wizcli docker tag -i $IMAGE_URI --digest sha256:${COMMIT_SHA}

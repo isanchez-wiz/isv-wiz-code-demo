@@ -49,4 +49,3 @@ gh pr merge ${BRANCH_NAME} --merge
 git branch -d ${BRANCH_NAME}
 git push origin --delete ${BRANCH_NAME}
 ```
-
