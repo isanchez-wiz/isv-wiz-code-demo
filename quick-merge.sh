@@ -16,5 +16,6 @@ git commit -m "${CHANGE_DESCRIPTION}"
 git push origin ${BRANCH_NAME}
 gh pr create --base main --head ${BRANCH_NAME} --title "${CHANGE_TITLE}" --body "${CHANGE_DESCRIPTION}"
 gh pr merge ${BRANCH_NAME} --merge
+sleep 5
 git branch -d ${BRANCH_NAME}
 git push origin --delete ${BRANCH_NAME}
