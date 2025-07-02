@@ -1,0 +1,70 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    env:
+      WIZ_CLIENT_ID: ${{ secrets.WIZ_CLIENT_ID }}
+      WIZ_CLIENT_SECRET: ${{ secrets.WIZ_CLIENT_SECRET }}
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Gulp build
+        run: npm run build
+
+      - name: Build and push latest Docker image
+        env:
+          REGISTRY: isv-test-registry
+          REPOSITORY: "prime-website"
+          COMMIT_SHA: ${{ github.sha }}
+        run: |
+          cd dist
+          IMAGE_TAG=$REGISTRY/$REPOSITORY:${COMMIT_SHA}
+          echo "Building Docker image with tag $IMAGE_TAG"
+          docker build -t $IMAGE_TAG .
+
+      - name: Download Wiz CLI
+        run: curl -o wizcli https://wizcli.app.wiz.io/latest/wizcli && chmod +x wizcli
+
+      - name: Authenticate to Wiz
+        run: sudo -E ./wizcli auth
+
+      - name: Run Wiz CLI image scan
+        id: scan
+        run: sudo -E ./wizcli docker scan -i $REGISTRY/$REPOSITORY:${COMMIT_SHA} --policy ${ODLUSER}-vuln
+        continue-on-error: false
+        env:
+          REGISTRY: isv-test-registry
+          REPOSITORY: "prime-website"
+          COMMIT_SHA: ${{ github.sha }}
+          ODLUSER: ${{ secrets.ODLUSER }}
+
+      - name: Run Wiz CLI image tag
+        env:
+          ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+          AWS_REGION: "us-east-1"
+          REPOSITORY: "prime-website"
+          COMMIT_SHA: ${{ github.sha }}
+        run: |
+          IMAGE_URI=$ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/$REPOSITORY:$COMMIT_SHA
+          sudo -E ./wizcli docker tag -i $IMAGE_URI
