@@ -35,9 +35,11 @@ To do code changes, PR and merge, execute:
 ```BRANCH_NAME="fix-testing"
 CHANGE_TITLE="Fix simulation"
 CHANGE_DESCRIPTION="Wiz test, simulation of a fix to trigger scanning process"
-git checkout -b ${BRANCH_NAME}
+# GET LATEST VERSION FROM MAIN BRANCH
 git checkout main
 git pull origin main
+# NEW LOCAL BRANCH FOR CHANGES
+git checkout -b ${BRANCH_NAME}
 # EDIT YOUR FILES
 git add .
 git commit -m "${CHANGE_DESCRIPTION}"
