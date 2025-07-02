@@ -19,7 +19,7 @@
     "gulp-html-replace": "^1.6.2",
     "gulp-uglify": "^3.0.2",
     "gulp-imagemin": "7.1.0",
+
     "next": "15.2.2"
   }
 }
-
