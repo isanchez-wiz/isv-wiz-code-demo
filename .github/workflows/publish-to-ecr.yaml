@@ -58,13 +58,3 @@ jobs:
           REPOSITORY: "prime-website"
           COMMIT_SHA: ${{ github.sha }}
           ODLUSER: ${{ secrets.ODLUSER }}
-
-      - name: Run Wiz CLI image tag
-        env:
-          REGISTRY: isv-test-registry
-          REPOSITORY: "prime-website"
-          COMMIT_SHA: ${{ github.sha }}
-        run: |
-          IMAGE_URI=$REGISTRY/$REPOSITORY:${COMMIT_SHA}
-          echo sha256:${COMMIT_SHA}
-          sudo -E ./wizcli docker tag -i $IMAGE_URI --digest sha256:${COMMIT_SHA}
