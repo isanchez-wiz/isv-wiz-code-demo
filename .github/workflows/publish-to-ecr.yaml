@@ -32,7 +32,7 @@ jobs:
       - name: Run Gulp build
         run: npm run build
 
-      - name: Build and push latest Docker image
+      - name: Build Docker image
         env:
           REGISTRY: isv-test-registry
           REPOSITORY: "prime-website"
@@ -61,10 +61,9 @@ jobs:
 
       - name: Run Wiz CLI image tag
         env:
-          ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-          AWS_REGION: "us-east-1"
+          REGISTRY: isv-test-registry
           REPOSITORY: "prime-website"
           COMMIT_SHA: ${{ github.sha }}
         run: |
-          IMAGE_URI=$ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/$REPOSITORY:$COMMIT_SHA
+          IMAGE_URI=$REGISTRY/$REPOSITORY:${COMMIT_SHA}
           sudo -E ./wizcli docker tag -i $IMAGE_URI
