@@ -11,6 +11,7 @@ CHANGE_DESCRIPTION="Wiz test, simulation of a fix to trigger scanning process ${
 git checkout -b ${BRANCH_NAME}
 # EDIT YOUR FILES (force dummy change)
 echo "RANDOM: ${R}" > random-file.dummy
+git update-index --really-refresh
 git add .
 git commit -m "${CHANGE_DESCRIPTION}"
 git push origin ${BRANCH_NAME}
