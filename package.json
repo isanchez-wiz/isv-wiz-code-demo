@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "build": "node --no-warnings node_modules/gulp/bin/gulp.js"
+    "build": "gulp --gulpfile ./gulpfile.mjs"
   },
   "dependencies": {
     "mockery": "1.0.1",
