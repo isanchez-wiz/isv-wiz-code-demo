@@ -1,6 +1,6 @@
 #! /bin/bash
 
-R="${RANDOM}"
+R="$(date +%y%m%d)-${RANDOM}"
 BRANCH_NAME="fix-testing-${R}"
 CHANGE_TITLE="Fix simulation ${R}"
 CHANGE_DESCRIPTION="Wiz test, simulation of a fix to trigger scanning process ${R}"
