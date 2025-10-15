@@ -1,7 +1,7 @@
 {
     "wiz.codePolicies.secrets": [
-        "isv-secrets",
-        "Default secrets policy"
+        "Default secrets policy",
+        "isv-secrets"
     ],
     "wiz.codePolicies.sensitiveData": [
         "Default sensitive data policy",
