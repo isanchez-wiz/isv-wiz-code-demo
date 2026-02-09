@@ -1,0 +1,2 @@
+WIZ_CLIENT_ID="vcznrrqdtzd77llspe7v6fcsudyua6yzutxv4yugchnq4btoo23he"
+WIZ_CLIENT_SECRET="HEsMurF3NcHzrbjtzJsHdYusTKu43PZKMm7d0yNK5cBp6WEOv7jTw5wigudgvua4"
